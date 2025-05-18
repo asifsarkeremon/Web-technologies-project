@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Recipe Finder</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f0f8ff;
+            margin: 20px;
+        }
+        h1 {
+            color: #2e8b57;
+            text-align: center;
+        }
+        .filter-area {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .recipe-img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+            border: 3px solid #4CAF50;
+        }
+        .recipe-info {
+            background-color: #e9f7ef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Find Your Perfect Recipe</h1>
+
+    <div class="filter-area">
+        <h2>Choose Your Options:</h2>
+        
+        <select id="cuisine">
+            <option value="">-- Select Cuisine --</option>
+            <option>Italian</option>
+            <option>Chinese</option>
+            <option>Indian</option>
+            <option>Mexican</option>
+            <option>American</option>
+        </select>
+        
+        <select id="meal">
+            <option value="">-- Select Meal Type --</option>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+        </select>
+        
+        <button onclick="showRecipe()">Find Recipe</button>
+    </div>
+
+    <div class="result" id="result" style="display:none;">
+        <h2>Your Recipe:</h2>
+        <img id="recipeImg" class="recipe-img" src="" alt="Recipe image">
+        <div class="recipe-info">
+            <h3 id="recipeTitle"></h3>
+            <p id="recipeDesc"></p>
+        </div>
+    </div>
+
+    <script>
+        // Simple recipe database with working image links
+        const recipes = {
+            "Italian-Breakfast": {
+                image: "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&auto=format",
+                title: "Italian Breakfast Frittata",
+                description: "A delicious egg dish with tomatoes, basil, and mozzarella."
+            },
+            "Italian-Lunch": {
+                image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&auto=format",
+                title: "Margherita Pizza",
+                description: "Classic pizza with tomato sauce, mozzarella, and basil."
+            },
+            "Italian-Dinner": {
+                image: "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&auto=format",
+                title: "Spaghetti Carbonara",
+                description: "Pasta with creamy egg sauce, pancetta, and cheese."
+            },
+            "Chinese-Breakfast": {
+                image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&auto=format",
+                title: "Congee Rice Porridge",
+                description: "Warm rice porridge with savory toppings."
+            },
+            "Chinese-Lunch": {
+                image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?w=600&auto=format",
+                title: "Vegetable Stir Fry",
+                description: "Colorful veggies with garlic sauce over rice."
+            },
+            "Chinese-Dinner": {
+                image: "https://images.unsplash.com/photo-1563245375-3f7cb974498f?w=600&auto=format",
+                title: "Peking Duck",
+                description: "Crispy duck served with pancakes and sauce."
+            },
+            "Indian-Breakfast": {
+                image: "https://images.unsplash.com/photo-1630918326543-5047f7b6dc42?w=600&auto=format",
+                title: "Masala Dosa",
+                description: "Crispy crepe with spiced potato filling."
+            },
+            "Indian-Lunch": {
+                image: "https://images.unsplash.com/photo-1633945274415-a3c5399027b5?w=600&auto=format",
+                title: "Butter Chicken",
+                description: "Tender chicken in creamy tomato sauce."
+            },
+            "Indian-Dinner": {
+                image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format",
+                title: "Vegetable Biryani",
+                description: "Fragrant rice with mixed vegetables."
+            }
+        };
+
+        function showRecipe() {
+            const cuisine = document.getElementById("cuisine").value;
+            const meal = document.getElementById("meal").value;
+            const resultDiv = document.getElementById("result");
+            
+            // Check if both selections are made
+            if (!cuisine || !meal) {
+                alert("Please select both cuisine and meal type");
+                return;
+            }
+            
+            const recipeKey = cuisine + "-" + meal;
+            
+            // Find the recipe or show a default
+            if (recipes[recipeKey]) {
+                document.getElementById("recipeImg").src = recipes[recipeKey].image;
+                document.getElementById("recipeTitle").textContent = recipes[recipeKey].title;
+                document.getElementById("recipeDesc").textContent = recipes[recipeKey].description;
+            } else {
+                document.getElementById("recipeImg").src = "https://via.placeholder.com/400x300?text=Recipe+Coming+Soon";
+                document.getElementById("recipeTitle").textContent = cuisine + " " + meal;
+                document.getElementById("recipeDesc").textContent = "We're still adding this recipe. Check back later!";
+            }
+            
+            // Show the result
+            resultDiv.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>

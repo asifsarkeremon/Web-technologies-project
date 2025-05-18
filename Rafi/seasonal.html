@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Seasonal Recipe Suggestions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2e8b57;
+            text-align: center;
+        }
+        h2 {
+            color: #228b22;
+            border-bottom: 2px solid #2e8b57;
+            padding-bottom: 5px;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+        }
+        td {
+            padding: 8px;
+            vertical-align: top;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background: #2e8b57;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #228b22;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Seasonal Recipe Suggestions</h1>
+
+    <!-- Seasonal Produce Guide -->
+    <div class="section">
+        <h2>Seasonal Produce Guide</h2>
+        <form method="post" onsubmit="showSeasonalRecipes(); return false;">
+            <table>
+                <tr>
+                    <td>Select the season:</td>
+                    <td>
+                        <select name="season" id="season">
+                            <option value="">--Select--</option>
+                            <option>Summer (March-June)</option>
+                            <option>Monsoon (July-October)</option>
+                            <option>Autumn (November)</option>
+                            <option>Winter (December-February)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Submit:</td>
+                    <td>
+                        <input type="submit" name="season_submit" value="Get Seasonal Recipes">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div id="seasonalResult" class="result"></div>
+    </div>
+
+    <!-- Holiday Meal Suggestions -->
+    <div class="section">
+        <h2>Holiday Meal Suggestions</h2>
+        <form method="post" onsubmit="showHolidayMeals(); return false;">
+            <table>
+                <tr>
+                    <td>Select a holiday:</td>
+                    <td>
+                        <select name="holiday" id="holiday">
+                            <option value="">--Select--</option>
+                            <option>Eid-ul-Fitr</option>
+                            <option>Eid-ul-Adha</option>
+                            <option>Durga Puja</option>
+                            <option>Pohela Boishakh</option>
+                            <option>Nobanno</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Submit:</td>
+                    <td>
+                        <input type="submit" name="holiday_submit" value="Find Holiday Meals">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div id="holidayResult" class="result"></div>
+    </div>
+
+    <!-- Farmers Market Finder -->
+    <div class="section">
+        <h2>Find Local Farmers Markets</h2>
+        <form method="post" onsubmit="findMarkets(); return false;">
+            <table>
+                <tr>
+                    <td>Enter your location:</td>
+                    <td>
+                        <input type="text" name="location" id="location" placeholder="Enter your city or district">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Submit:</td>
+                    <td>
+                        <input type="submit" name="market_submit" value="Find Farmers Markets">
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div id="marketResult" class="result"></div>
+    </div>
+
+    <script>
+        // Seasonal produce data for Bangladesh
+        const seasonalData = {
+            "Summer (March-June)": {
+                produce: ["Mango", "Jackfruit", "Litchi", "Pineapple", "Watermelon"],
+                recipes: ["Aam doi (Mango yogurt)", "Jackfruit curry", "Litchi juice"]
+            },
+            "Monsoon (July-October)": {
+                produce: ["Hilsha fish", "Pui shaak", "Bottle gourd", "Pumpkin"],
+                recipes: ["Shorshe ilish", "Pui shaak bhaji", "Lau er dal"]
+            },
+            "Autumn (November)": {
+                produce: ["New rice", "Mustard greens", "Cauliflower"],
+                recipes: ["Panta bhat", "Shorshe shaak", "Cauliflower curry"]
+            },
+            "Winter (December-February)": {
+                produce: ["Tomato", "Carrot", "Beetroot", "Spinach"],
+                recipes: ["Tomato chutney", "Gajorer halwa", "Palong shaak"]
+            }
+        };
+
+        // Holiday meal data
+        const holidayData = {
+            "Eid-ul-Fitr": ["Shemai", "Polao", "Beef rezala", "Firni"],
+            "Eid-ul-Adha": ["Korma", "Kabab", "Borhani", "Bhuna khichuri"],
+            "Durga Puja": ["Khichuri", "Labra", "Beguni", "Payesh"],
+            "Pohela Boishakh": ["Panta ilish", "Bhorta platter", "Pitha"],
+            "Nobanno": ["New rice payesh", "Gur er shondesh", "Naru"]
+        };
+
+        // Market data for Bangladesh
+        const marketData = {
+            "Dhaka": ["Kawran Bazar", "Jatrabari Shaheed Nagar Market", "Agargaon Farmers Market"],
+            "Chittagong": ["Khatunganj Market", "Agrabad Accessories Market"],
+            "Sylhet": ["Bandar Bazar", "Zindabazar Market"],
+            "Khulna": ["Khalishpur Market", "Sonadanga Farmers Market"],
+            "Rajshahi": ["Shaheb Bazar", "Binodpur Farmers Market"],
+            "Barisal": ["Nathullabad Market", "Rupatoli Farmers Market"]
+        };
+
+        function showSeasonalRecipes() {
+            const season = document.getElementById("season").value;
+            const resultDiv = document.getElementById("seasonalResult");
+            
+            if (!season) {
+                alert("Please select a season");
+                return;
+            }
+            
+            const data = seasonalData[season];
+            let html = `<h3>${season} in Bangladesh</h3>`;
+            html += `<p><strong>Available Produce:</strong> ${data.produce.join(", ")}</p>`;
+            html += `<p><strong>Recipe Ideas:</strong></p><ul>`;
+            data.recipes.forEach(recipe => {
+                html += `<li>${recipe}</li>`;
+            });
+            html += `</ul>`;
+            
+            resultDiv.innerHTML = html;
+            resultDiv.style.display = "block";
+        }
+
+        function showHolidayMeals() {
+            const holiday = document.getElementById("holiday").value;
+            const resultDiv = document.getElementById("holidayResult");
+            
+            if (!holiday) {
+                alert("Please select a holiday");
+                return;
+            }
+            
+            const meals = holidayData[holiday];
+            let html = `<h3>${holiday} Special Meals</h3><ul>`;
+            meals.forEach(meal => {
+                html += `<li>${meal}</li>`;
+            });
+            html += `</ul>`;
+            
+            resultDiv.innerHTML = html;
+            resultDiv.style.display = "block";
+        }
+
+        function findMarkets() {
+            const location = document.getElementById("location").value.trim();
+            const resultDiv = document.getElementById("marketResult");
+            
+            if (!location) {
+                alert("Please enter your location");
+                return;
+            }
+            
+            // Find matching markets (simple match for demo)
+            let foundMarkets = [];
+            for (const city in marketData) {
+                if (city.toLowerCase().includes(location.toLowerCase())) {
+                    foundMarkets = marketData[city];
+                    break;
+                }
+            }
+            
+            if (foundMarkets.length === 0) {
+                resultDiv.innerHTML = `<p>No markets found for ${location}. Try nearby major cities.</p>`;
+            } else {
+                let html = `<h3>Farmers Markets in ${location}</h3><ul>`;
+                foundMarkets.forEach(market => {
+                    html += `<li>${market}</li>`;
+                });
+                html += `</ul>`;
+                resultDiv.innerHTML = html;
+            }
+            
+            resultDiv.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
