@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="design_css2.css">
+</head>
+<body>
+    <header>
+        <div class="c5">Logo</div>
+    </header>
+
+    <div class="c6">
+        <nav class="c7">
+            <ul class="c8">
+                <li><a href="logged_dashboard.html">Home</a></li>
+                <li><a href="view_profile.html">View Profile</a></li>
+                <li><a href="edit_profile.html">Edit Profile</a></li>
+                <li><a href="profile_picture.html">Change Profile Picture</a></li>
+                <li><a href="change_password.html">Change Password</a></li>
+                <li><a href="logout.html">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="c9">
+            <h1>Edit Profile</h1>
+            <form action="save_profile.php" method="post">
+                <div class="c2">
+                    <label>Name</label><br>
+                    <input name="name" type="text" value="John Doe"> <br>
+                </div>
+
+                <div class="c2">
+                    <label>Username</label><br>
+                    <input name="username" type="text" value="johndoe"> <br>
+                </div>
+
+                <div class="c2">
+                    <label>Email</label><br>
+                    <input name="email" type="email" value="john@example.com"> <br>
+                </div>
+
+                <div class="c2">
+                    <label>Date of Birth</label><br>
+                    <input name="dob" type="date" value="1990-01-01"> <br>
+                </div>
+
+                <div class="c2">
+                    <label>Gender</label><br>
+                    <input name="gender" type="radio" value="Male" checked> Male
+                    <input name="gender" type="radio" value="Female"> Female <br>
+                </div>
+
+                <div class="c2">
+                    <label>Password</label><br>
+                    <input name="pass" type="password" value="12345678" disabled> <br>
+                </div>
+
+                <div class="c11">
+                    <button type="submit" class="c10">Save Changes</button>
+                    <button type="reset" class="c10" >Reset</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
