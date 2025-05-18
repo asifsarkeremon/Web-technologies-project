@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #89909f;
+    font-size: 12px;
+    margin: 0;
+    padding-top: 150px;
+}
+
+.header_1 {
+    height: 150px;
+    width: 100%;
+    padding: 0 30px;
+    background-color: #0b121b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.c5 {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+}
+
+.c6{
+    margin-left:auto;
+    color: white;
+}
+
+.c6 a {
+    color:#40a9ff;
+    margin-right:10px;
+
+}
+
+.c7 {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    min-height: calc(100vh - 150px);
+}
+
+.c8 {
+    background: #0b121b;
+    padding: 32px 16px;
+    height: 100%;
+}
+
+.c9 {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-left: 30px;
+}
+
+.c9 li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.c9 li a:hover {
+    color: #40a9ff;
+    font-weight: bold;
+}
+
+.c10 {
+    padding: 32px;
+    background-color: #f1f2f6;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.c10 h1 {
+    font-size: 28.8px;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.c10 button {
+    background: #40a9ff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.c11 {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.c11 select {
+    padding: 6px;
+    font-size: 14px;
+}
+
+
+.c12 {
+    flex: 1;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
+}
+
+.c13{
+    padding: 12px;
+}
