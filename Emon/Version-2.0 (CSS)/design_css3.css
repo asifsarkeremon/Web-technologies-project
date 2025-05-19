@@ -158,17 +158,37 @@ body {
 }
 
 .c18_1{
-    background-color: #e0f7fa; padding: 6px 12px; border-radius: 20px;
+    background-color: #e0f7fa; 
+    padding: 6px 12px; 
+    border-radius: 20px;
 }
 
 .c18_2{
-    background-color: #f1f8e9; padding: 6px 12px; border-radius: 20px;
+    background-color: #f1f8e9; 
+    padding: 6px 12px; 
+    border-radius: 20px;
 }
 
 .c18_3{
-    background-color: #fff3e0; padding: 6px 12px; border-radius: 20px;
+    background-color: #fff3e0; 
+    padding: 6px 12px; 
+    border-radius: 20px;
 }
 
 .c18_4{
-    background-color: #fce4ec; padding: 6px 12px; border-radius: 20px;
+    background-color: #fce4ec; 
+    padding: 6px 12px; 
+    border-radius: 20px;
+}
+
+.c19{
+    text-align: center; 
+    border-collapse: collapse; 
+    background-color: white; 
+    border-radius: 12px; 
+    overflow: hidden;
+}
+
+.c19 th{
+    padding: 12px;
 }
