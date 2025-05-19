@@ -125,3 +125,50 @@ body {
 .c13{
     padding: 12px;
 }
+
+.c14{
+    margin-bottom: 20px;
+}
+
+.c15{
+    width: 100%; 
+    border-collapse: collapse; 
+    background-color: white; 
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.c16{
+    padding: 10px;
+}
+
+.c17{
+    margin-bottom: 20px;
+}
+
+.c17 ul{
+    list-style-type: disc; 
+    padding-left: 20px;
+}
+
+.c18{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.c18_1{
+    background-color: #e0f7fa; padding: 6px 12px; border-radius: 20px;
+}
+
+.c18_2{
+    background-color: #f1f8e9; padding: 6px 12px; border-radius: 20px;
+}
+
+.c18_3{
+    background-color: #fff3e0; padding: 6px 12px; border-radius: 20px;
+}
+
+.c18_4{
+    background-color: #fce4ec; padding: 6px 12px; border-radius: 20px;
+}
