@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Recipe Conversion Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #2e8b57;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: #e0e0e0;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background: #4CAF50;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 0 0 5px 5px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .converter-box {
+            margin-bottom: 20px;
+        }
+        input, select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Recipe Conversion Calculator</h1>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="openTab('converter')">Measurement Converter</div>
+            <div class="tab" onclick="openTab('dictionary')">Unit Dictionary</div>
+        </div>
+        
+        <!-- Measurement Converter Tab -->
+        <div id="converter" class="tab-content active">
+            <h2>Measurement Converter</h2>
+            
+            <div class="converter-box">
+                <label for="convertValue">Amount:</label>
+                <input type="number" id="convertValue" step="0.01" min="0">
+                
+                <label for="convertFrom">From:</label>
+                <select id="convertFrom">
+                    <option value="tsp">Teaspoon (tsp)</option>
+                    <option value="tbsp">Tablespoon (tbsp)</option>
+                    <option value="cup">Cup (cup)</option>
+                    <option value="oz">Ounce (oz)</option>
+                    <option value="lb">Pound (lb)</option>
+                    <option value="ml">Milliliter (ml)</option>
+                    <option value="l">Liter (l)</option>
+                    <option value="g">Gram (g)</option>
+                    <option value="kg">Kilogram (kg)</option>
+                </select>
+                
+                <label for="convertTo">To:</label>
+                <select id="convertTo">
+                    <option value="tsp">Teaspoon (tsp)</option>
+                    <option value="tbsp">Tablespoon (tbsp)</option>
+                    <option value="cup">Cup (cup)</option>
+                    <option value="oz">Ounce (oz)</option>
+                    <option value="lb">Pound (lb)</option>
+                    <option value="ml">Milliliter (ml)</option>
+                    <option value="l">Liter (l)</option>
+                    <option value="g">Gram (g)</option>
+                    <option value="kg">Kilogram (kg)</option>
+                </select>
+                
+                <button onclick="convertMeasurement()">Convert</button>
+                
+                <div id="convertResult" class="result"></div>
+            </div>
+            
+           
+        </div>
+        
+       
+        <!-- Unit Dictionary Tab -->
+        <div id="dictionary" class="tab-content">
+            <h2>Unit Conversion Reference</h2>
+            
+            <table>
+                <tr>
+                    <th>Unit</th>
+                    <th>Equivalent To</th>
+                </tr>
+                <tr>
+                    <td>1 teaspoon (tsp)</td>
+                    <td>5 milliliters (ml)</td>
+                </tr>
+                <tr>
+                    <td>1 tablespoon (tbsp)</td>
+                    <td>3 teaspoons (15 ml)</td>
+                </tr>
+                <tr>
+                    <td>1 cup</td>
+                    <td>16 tablespoons (240 ml)</td>
+                </tr>
+                <tr>
+                    <td>1 fluid ounce (oz)</td>
+                    <td>2 tablespoons (30 ml)</td>
+                </tr>
+                <tr>
+                    <td>1 pound (lb)</td>
+                    <td>16 ounces (454 grams)</td>
+                </tr>
+                <tr>
+                    <td>1 milliliter (ml)</td>
+                    <td>0.034 fluid ounces</td>
+                </tr>
+                <tr>
+                    <td>1 liter (l)</td>
+                    <td>4.2 cups (1000 ml)</td>
+                </tr>
+                <tr>
+                    <td>1 gram (g)</td>
+                    <td>0.035 ounces</td>
+                </tr>
+                <tr>
+                    <td>1 kilogram (kg)</td>
+                    <td>2.2 pounds</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching function
+        function openTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName("tab");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            
+            // Show the selected tab and mark it as active
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+        
+        // Conversion factors
+        const conversionFactors = {
+            // Volume
+            tsp: { 
+                tbsp: 1/3, 
+                cup: 1/48, 
+                oz: 1/6, 
+                lb: 0.0104, 
+                ml: 5, 
+                l: 0.005, 
+                g: 5, 
+                kg: 0.005 
+            },
+            tbsp: { 
+                tsp: 3, 
+                cup: 1/16, 
+                oz: 0.5, 
+                lb: 0.03125, 
+                ml: 15, 
+                l: 0.015, 
+                g: 15, 
+                kg: 0.015 
+            },
+            cup: { 
+                tsp: 48, 
+                tbsp: 16, 
+                oz: 8, 
+                lb: 0.5, 
+                ml: 240, 
+                l: 0.24, 
+                g: 240, 
+                kg: 0.24 
+            },
+            oz: { 
+                tsp: 6, 
+                tbsp: 2, 
+                cup: 0.125, 
+                lb: 0.0625, 
+                ml: 30, 
+                l: 0.03, 
+                g: 30, 
+                kg: 0.03 
+            },
+            lb: { 
+                tsp: 96, 
+                tbsp: 32, 
+                cup: 2, 
+                oz: 16, 
+                ml: 480, 
+                l: 0.48, 
+                g: 480, 
+                kg: 0.48 
+            },
+            // Metric
+            ml: { 
+                tsp: 0.2, 
+                tbsp: 0.0667, 
+                cup: 0.0042, 
+                oz: 0.0333, 
+                lb: 0.0021, 
+                l: 0.001, 
+                g: 1, 
+                kg: 0.001 
+            },
+            l: { 
+                tsp: 200, 
+                tbsp: 66.6667, 
+                cup: 4.1667, 
+                oz: 33.3333, 
+                lb: 2.0833, 
+                ml: 1000, 
+                g: 1000, 
+                kg: 1 
+            },
+            g: { 
+                tsp: 0.2, 
+                tbsp: 0.0667, 
+                cup: 0.0042, 
+                oz: 0.0333, 
+                lb: 0.0021, 
+                ml: 1, 
+                l: 0.001, 
+                kg: 0.001 
+            },
+            kg: { 
+                tsp: 200, 
+                tbsp: 66.6667, 
+                cup: 4.1667, 
+                oz: 33.3333, 
+                lb: 2.0833, 
+                ml: 1000, 
+                l: 1, 
+                g: 1000 
+            }
+        };
+        
+        // Convert measurement
+        function convertMeasurement() {
+            const value = parseFloat(document.getElementById("convertValue").value);
+            const fromUnit = document.getElementById("convertFrom").value;
+            const toUnit = document.getElementById("convertTo").value;
+            
+            if (isNaN(value)) {
+                document.getElementById("convertResult").innerHTML = "Please enter a valid number";
+                return;
+            }
+            
+            if (fromUnit === toUnit) {
+                document.getElementById("convertResult").innerHTML = "Same units selected - no conversion needed";
+                return;
+            }
+            
+            const result = value * conversionFactors[fromUnit][toUnit];
+            document.getElementById("convertResult").innerHTML = 
+                `${value} ${fromUnit} = ${result.toFixed(2)} ${toUnit}`;
+        }
+        
+        
+        
+    </script>
+
+</body>
+</html>
