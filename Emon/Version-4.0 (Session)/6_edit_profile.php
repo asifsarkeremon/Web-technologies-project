@@ -28,7 +28,7 @@
                 <li><a href="6_edit_profile.php">Edit Profile</a></li>
                 <li><a href="profile_picture.php">Change Profile Picture</a></li>
                 <li><a href="7_up_pass.php">Change Password</a></li>
-                <li><a href="1_login.php">Logout</a></li>
+                <li><a href="15_logout.php">Logout</a></li>
             </ul>
         </nav>
 

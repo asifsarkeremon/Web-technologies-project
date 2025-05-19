@@ -33,7 +33,7 @@
                 <li><a href="12_Shop_list.php">Shopping List</a></li>
                 <li><a href="13_nutri_info.php">Nutritional Info</a></li>
                 <li><a href="14_timer.php">Cooking Timer</a></li>
-                <li><a href="1_login.php">Logout</a></li>
+                <li><a href="15_logout.php">Logout</a></li>
             </ul>
         </nav>
 
