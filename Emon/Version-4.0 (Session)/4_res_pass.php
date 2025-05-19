@@ -9,7 +9,7 @@
 <body>
     <div class="c1">
         <h1>Reset Password</h1>
-        <form onsubmit="return validate()">
+        <form action="1_login.php" onsubmit="return validate()">
 
             <div class="c2">
                 <label>Enter New Password</label>

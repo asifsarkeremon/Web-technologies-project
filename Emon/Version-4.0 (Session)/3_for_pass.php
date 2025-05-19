@@ -9,7 +9,7 @@
 <body>
     <div class="c1">
         <h1>Forgot Password</h1>
-        <form form action="4_res_pass.html" onsubmit="return validate()">
+        <form action="4_res_pass.php" onsubmit="return validate()">
             <div class="c2">
                 <label>Enter Username</label>
                 <input name="username" id="username" type="text" value=""> <br>
@@ -19,8 +19,8 @@
             <button type="submit" value="submit" class="c3">Submit</button>
 
             <p class="c4">
-                <a href="2_signup.html">Signup</a>
-                <a href="1_login.html">Go to Login</a>
+                <a href="2_signup.php">Signup</a><br>
+                <a href="1_login.php">Go to Login</a>
             </p>
         </form>
     </div>

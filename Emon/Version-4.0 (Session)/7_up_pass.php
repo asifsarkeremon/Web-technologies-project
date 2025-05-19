@@ -17,18 +17,18 @@
 </head>
 <body>
     <header>
-        <div class="c5">Logo</div>
+        <div class="c5">Foodie</div>
     </header>
 
     <div class="c6">
         <nav class="c7">
             <ul class="c8">
-                <li><a href="logged_dashboard.html">Home</a></li>
-                <li><a href="view_profile.html">View Profile</a></li>
-                <li><a href="edit_profile.html">Edit Profile</a></li>
-                <li><a href="profile_picture.html">Change Profile Picture</a></li>
-                <li><a href="change_password.html">Change Password</a></li>
-                <li><a href="logout.html">Logout</a></li>
+                <li><a href="8_dashboard.php">Home</a></li>
+                <li><a href="5_profile.php">View Profile</a></li>
+                <li><a href="6_edit_profile.php">Edit Profile</a></li>
+                <li><a href="profile_picture.php">Change Profile Picture</a></li>
+                <li><a href="7_up_pass.php">Change Password</a></li>
+                <li><a href="1_login.php">Logout</a></li>
             </ul>
         </nav>
 

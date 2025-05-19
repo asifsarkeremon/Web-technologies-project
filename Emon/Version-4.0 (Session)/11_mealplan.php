@@ -17,23 +17,23 @@
 </head>
 <body>
     <header class="header_1">
-        <div class="c5">Logo</div>
+        <div class="c5">Foodie</div>
         <div class="c6">
-            <a href="5_profile.html">User</a> |
-            <a href="2_signup.html">Logout</a>
+            <a href="5_profile.php">User</a> |
+            <a href="2_signup.php">Logout</a>
         </div>
     </header>
     
     <div class="c7">
         <nav class="c8">
             <ul class="c9">
-                <li><a href="8_dashboard.html">Home</a></li>
-                <li><a href="9_receipe.html">Recipe</a></li>
-                <li><a href="11_mealplan.html">Meal Planner</a></li>
-                <li><a href="12_Shop_list.html">Shopping List</a></li>
-                <li><a href="13_nutri_info.html">Nutritional Info</a></li>
-                <li><a href="14_timer.html">Cooking Timer</a></li>
-                <li><a href="1_login.html">Logout</a></li>
+                <li><a href="8_dashboard.php">Home</a></li>
+                <li><a href="9_receipe.php">Recipe</a></li>
+                <li><a href="11_mealplan.php">Meal Planner</a></li>
+                <li><a href="12_Shop_list.php">Shopping List</a></li>
+                <li><a href="13_nutri_info.php">Nutritional Info</a></li>
+                <li><a href="14_timer.php">Cooking Timer</a></li>
+                <li><a href="1_login.php">Logout</a></li>
             </ul>
         </nav>
         

@@ -1,78 +1,61 @@
-<?php
-    session_start();
-    if(isset($_SESSION['status'])){
-
-    }else{
-        header('location: 1_login.php');
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile</title>
-    <link rel="stylesheet" href="design_css2.css">
+    <title>Registration</title>
+    <link rel="stylesheet" href="design_css.css">
 </head>
 <body>
-    <header>
-        <div class="c5">Logo</div>
-    </header>
+    <div class="c1">
+        <h1>Registration</h1>
+        <form method="post" action="signupCheck.php">
+            <fieldset style="border: none;">
 
-    <div class="c6">
-        <nav class="c7">
-            <ul class="c8">
-                <li><a href="logged_dashboard.html">Home</a></li>
-                <li><a href="view_profile.html">View Profile</a></li>
-                <li><a href="edit_profile.html">Edit Profile</a></li>
-                <li><a href="profile_picture.html">Change Profile Picture</a></li>
-                <li><a href="change_password.html">Change Password</a></li>
-                <li><a href="logout.html">Logout</a></li>
-            </ul>
-        </nav>
-
-        <main class="c9">
-            <h1>Edit Profile</h1>
-            <form action="5_profile.html" onsubmit="return validate()">
                 <div class="c2">
-                    <label>Name</label><br>
-                    <input name="name" id="name" type="text" value="Asif Emon"> <br>
+                    <label>Name</label>
+                    <input name="name" id="name" type="text" value=""> <br>
                     <p id="msg"></p>
                 </div>
 
                 <div class="c2">
-                    <label>Username</label><br>
-                    <input name="username" id="username" type="text" value="asifemon"> <br>
+                    <label>Username</label>
+                    <input name="username" id="username" type="text" value=""> <br>
                     <p id="umsg"></p>
                 </div>
 
                 <div class="c2">
-                    <label>Email</label><br>
-                    <input name="email" id="email" type="email" value="asifemon@gmail.com"> <br>
+                    <label>Email</label>
+                    <input name="email" id="email" type="email" value=""> <br>
                     <p id="emsg"></p>
                 </div>
 
                 <div class="c2">
-                    <label>Gender</label><br>
-                    <input type="radio" name="gender" value="Male" checked> Male
-                    <input type="radio" name="gender" value="Female"> Female <br>
+                    <label>Gender</label>
+                    <div class="c2_1">
+                        <label><input type="radio" name="gender" value="Male"> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                    </div>
                     <p id="gmsg"></p>
-                </div>
+                </div>                
 
                 <div class="c2">
-                    <label>Password</label><br>
-                    <input name="pass" id="pass" type="password" value="12345678" disabled> <br>
+                    <label for="pass">Password</label>
+                    <input name="pass" id="pass" type="password" value=""> <br>
                     <p id="pmsg"></p>
                 </div>
 
-                <div class="c11">
-                    <button type="submit" class="c10">Save Changes</button>
-                    <button type="reset" class="c10" >Reset</button>
-                </div>
-            </form>
-        </main>
+                <p id="vmsg"></p><br>
+
+                <button type="submit" value="submit" class="c3">Submit</button>
+                <button type="reset" value="reset" class="c3">Reset</button>
+
+                <a href="1_login.php" class="c4">Go to Login</a>
+
+            </fieldset>
+        </form>
     </div>
+    
     <script>
         function validate(){
             // Validate Name
@@ -146,6 +129,25 @@
             if (gender === null) {
                 gmsg.innerHTML = "At least one of them has to be selected";
                 gmsg.style.color = 'red';
+                return false;
+            }
+
+            // Validate Password
+            let password = document.getElementById('pass').value;
+            let pmsg = document.getElementById('pmsg');
+            pmsg.innerHTML = "";
+            if (password === "") {
+                pmsg.innerHTML = "Please type password!";
+                pmsg.style.color = 'red';
+                return false;
+            }
+
+            // Username must match Password
+            let vmsg = document.getElementById('vmsg');
+            vmsg.innerHTML = "";
+            if (username !== password) {
+                vmsg.innerHTML = "Username and password should be the same";
+                vmsg.style.color = 'red';
                 return false;
             }
 

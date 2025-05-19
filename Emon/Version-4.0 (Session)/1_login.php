@@ -12,13 +12,13 @@
         <form method="post" action="loginCheck.php">
             <fieldset style="border: none;">
                 <div class="c2">
-                    <label for="username">Username</label>
+                    <label>Username</label>
                     <input name="username" id="username" type="text">
                     <p id="umsg"></p>
                 </div>
     
                 <div class="c2">
-                    <label for="pass">Password</label>
+                    <label>Password</label>
                     <input name="pass" id="pass" type="password">
                     <p id="pmsg"></p>
                 </div>
@@ -27,8 +27,8 @@
                 <p id="vmsg"></p>
     
                 <p class="c4">
-                    <a href="3_for_pass.html">Forgot Password?</a><br><br>
-                    Don't have an account? <a href="2_signup.html">Sign up</a>
+                    <a href="3_for_pass.php">Forgot Password?</a><br><br>
+                    Don't have an account? <a href="2_signup.php">Sign up</a>
                 </p>
             </fieldset>
         </form>
@@ -51,7 +51,7 @@
             let pmsg = document.getElementById('pmsg');
 
             if(password == ""){
-                pmsg.innerHTML = "please type username first!";
+                pmsg.innerHTML = "please enter password first!";
                 pmsg.style.color = 'red';
             }else{
                 pmsg.innerHTML = "";
@@ -65,7 +65,7 @@
             }else{
                 vmsg.innerHTML = "";
             }
-            return false;
+            return true;
         }
     </script>
 </body>
