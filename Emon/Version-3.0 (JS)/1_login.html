@@ -12,13 +12,13 @@
         <form action="8_dashboard.html" onsubmit="return validate()">
             <fieldset style="border: none;">
                 <div class="c2">
-                    <label for="username">Username</label>
+                    <label>Username</label>
                     <input name="username" id="username" type="text">
                     <p id="umsg"></p>
                 </div>
     
                 <div class="c2">
-                    <label for="pass">Password</label>
+                    <label>Password</label>
                     <input name="pass" id="pass" type="password">
                     <p id="pmsg"></p>
                 </div>
@@ -51,7 +51,7 @@
             let pmsg = document.getElementById('pmsg');
 
             if(password == ""){
-                pmsg.innerHTML = "please type username first!";
+                pmsg.innerHTML = "please enter password first!";
                 pmsg.style.color = 'red';
             }else{
                 pmsg.innerHTML = "";
@@ -65,7 +65,7 @@
             }else{
                 vmsg.innerHTML = "";
             }
-            return false;
+            return true;
         }
     </script>
 </body>
