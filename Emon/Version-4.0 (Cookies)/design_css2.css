@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #89909f;
+    font-size: 12px;
+}
+
+header {
+    height: 70px;
+    width: 100%;
+    padding: 0 30px;
+    background-color: #0b121b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.c2 {
+    margin-bottom: 24px;
+    position: relative;
+    left: 30px;
+}
+
+.c2 label {
+    font-size: 17.6px;
+    color: #333;
+}
+
+.c2 input {
+    width: 400px;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+}
+
+.c2 input:disabled {
+    background-color: #f1f1f1;
+    color: #777;
+}
+
+.c2 input[type="radio"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+.c5 {
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.c6 {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    height: 100%;
+    margin-top: 70px;
+}
+
+.c7 {
+    background: #0b121b;
+    padding: 32px 16px;
+    height: 100%;
+}
+
+.c8 {
+    position: relative;
+    margin-top: 30px;
+    left: 30px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.c8 li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.c8 li a:hover {
+    color: #40a9ff;
+    font-weight: bold;
+}
+
+.c9 {
+    padding: 32px;
+    background-color: #f1f2f6;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.c9 h1 {
+    font-size: 28.8px;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.c10 {
+    position: relative;
+    left: 30px;
+    width: 100%;
+    padding: 16px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.c10:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
+
+
+.c11 {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 16px;
+    width: 400px;
+}
+
+
