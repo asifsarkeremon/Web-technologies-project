@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us - RecipeMaster</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border: 2px solid #2e8b57; /* Green border */
+            border-radius: 10px;
+            width: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2e8b57; /* Green heading */
+            margin-bottom: 20px;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #2e8b57; /* Green labels */
+            display: block;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #2e8b57; /* Green button */
+            color: #fff;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #228b22; /* Darker green on hover */
+        }
+        .error {
+            color: #cc0000; /* Keeping error messages red for visibility */
+            font-size: 0.9em;
+            margin: -8px 0 10px 0;
+        }
+        .captcha-container {
+            background: #e8f5e9; /* Light green background */
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .captcha-text {
+            font-size: 24px;
+            letter-spacing: 3px;
+            margin: 10px 0;
+            color: #2e8b57; /* Green CAPTCHA text */
+            font-weight: bold;
+            user-select: none;
+        }
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background: #e8f5e9; /* Light green background */
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .confirmation h2 {
+            color: #2e8b57; /* Green confirmation heading */
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>Contact RecipeMaster</h1>
+    
+    <form id="contactForm" onsubmit="submitForm(event)">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+        <p class="error" id="nameError"></p>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+        <p class="error" id="emailError"></p>
+
+        <label for="subject">Subject:</label>
+        <select id="subject" name="subject" required>
+            <option value="">Select a subject</option>
+            <option>Account Support</option>
+            <option>Recipe Submission</option>
+            <option>Feature Request</option>
+            <option>Report a Problem</option>
+            <option>Other Inquiry</option>
+        </select>
+        <p class="error" id="subjectError"></p>
+
+        <label for="message">Your Message:</label>
+        <textarea id="message" name="message" required></textarea>
+        <p class="error" id="messageError"></p>
+
+        <div class="captcha-container">
+            <p>Please enter the text below to prove you're not a robot:</p>
+            <div class="captcha-text" id="captchaText"></div>
+            <input type="text" id="captchaInput" placeholder="Enter the text above" required>
+            <p class="error" id="captchaError"></p>
+        </div>
+
+        <input type="submit" value="Send Message">
+    </form>
+    
+    <div class="confirmation" id="confirmation">
+        <h2>Thank You!</h2>
+        <p>Your message has been successfully submitted.</p>
+        <p>We've sent a confirmation email to <span id="userEmail"></span>.</p>
+        <p>Our team will get back to you within 2 business days.</p>
+    </div>
+</div>
+
+<script>
+    // Generate random CAPTCHA
+    function generateCaptcha() {
+        const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let captcha = "";
+        for (let i = 0; i < 6; i++) {
+            captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById("captchaText").textContent = captcha;
+        return captcha;
+    }
+    
+    let currentCaptcha = generateCaptcha();
+    
+    // Form submission
+    function submitForm(event) {
+        event.preventDefault();
+        
+        // Reset errors
+        document.querySelectorAll(".error").forEach(el => el.textContent = "");
+        
+        // Get form values
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value.trim();
+        const captchaInput = document.getElementById("captchaInput").value.trim();
+        
+        // Validate form
+        let isValid = true;
+        
+        if (!name) {
+            document.getElementById("nameError").textContent = "Please enter your name";
+            isValid = false;
+        }
+        
+        if (!email) {
+            document.getElementById("emailError").textContent = "Please enter your email";
+            isValid = false;
+        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+            document.getElementById("emailError").textContent = "Please enter a valid email";
+            isValid = false;
+        }
+        
+        if (!subject) {
+            document.getElementById("subjectError").textContent = "Please select a subject";
+            isValid = false;
+        }
+        
+        if (!message) {
+            document.getElementById("messageError").textContent = "Please enter your message";
+            isValid = false;
+        }
+        
+        if (captchaInput !== currentCaptcha) {
+            document.getElementById("captchaError").textContent = "CAPTCHA verification failed";
+            isValid = false;
+            currentCaptcha = generateCaptcha();
+            document.getElementById("captchaInput").value = "";
+        }
+        
+        if (!isValid) return;
+        
+        // Show confirmation
+        document.getElementById("contactForm").style.display = "none";
+        document.getElementById("confirmation").style.display = "block";
+        document.getElementById("userEmail").textContent = email;
+        
+        // In a real implementation, you would:
+        // 1. Send the form data to your server
+        // 2. Have your server send a confirmation email
+        // 3. Store the inquiry in your database
+        
+        console.log("Form submitted:", { name, email, subject, message });
+        
+        // For demo purposes, let's simulate sending an email
+        setTimeout(() => {
+            alert(`Confirmation email sent to: ${email}\n\nSubject: We've received your message\nBody: Thank you for contacting RecipeMaster! We've received your inquiry regarding "${subject}" and will respond within 2 business days.`);
+        }, 1000);
+    }
+    
+    // Refresh CAPTCHA
+    document.getElementById("captchaText").addEventListener("click", function() {
+        currentCaptcha = generateCaptcha();
+        document.getElementById("captchaInput").value = "";
+    });
+</script>
+</body>
+</html>
