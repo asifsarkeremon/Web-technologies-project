@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - RecipeMaster</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #2e8b57;
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .notification-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        .notification-bell {
+            font-size: 24px;
+            color: white;
+        }
+        .notification-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ff4757;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .notification-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            width: 350px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        .notification-dropdown.show {
+            display: block;
+        }
+        .notification-header {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .notification-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .notification-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+        .notification-item.unread {
+            background-color: #f0f8ff;
+        }
+        .notification-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+        }
+        .notification-content {
+            flex: 1;
+        }
+        .notification-time {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+        .mark-all-read {
+            color: #2e8b57;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .notification-settings {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .settings-title {
+            margin-top: 0;
+            color: #2e8b57;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .notification-type {
+            margin-bottom: 20px;
+        }
+        .notification-type h3 {
+            margin-bottom: 10px;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 30px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2e8b57;
+        }
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        .toggle-label {
+            margin-left: 15px;
+            vertical-align: middle;
+        }
+        .btn {
+            background-color: #2e8b57;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #228b22;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>RecipeMaster</h1>
+            <div class="notification-icon" id="notificationIcon">
+                <span class="notification-bell">🔔</span>
+                <span class="notification-count" id="notificationCount">3</span>
+                <div class="notification-dropdown" id="notificationDropdown">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <span class="mark-all-read" id="markAllRead">Mark all as read</span>
+                    </div>
+                    <div class="notification-list" id="notificationList">
+                        <div class="notification-item unread">
+                            <img src="https://via.placeholder.com/40" alt="Recipe">
+                            <div class="notification-content">
+                                <p><strong>New comment</strong> on your Chicken Korma recipe</p>
+                                <p class="notification-time">2 minutes ago</p>
+                            </div>
+                        </div>
+                        <div class="notification-item unread">
+                            <img src="https://via.placeholder.com/40" alt="User">
+                            <div class="notification-content">
+                                <p><strong>Jamie</strong> liked your Biryani recipe</p>
+                                <p class="notification-time">1 hour ago</p>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <img src="https://via.placeholder.com/40" alt="System">
+                            <div class="notification-content">
+                                <p>Your recipe was featured in <strong>Seasonal Collections</strong></p>
+                                <p class="notification-time">Yesterday</p>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <img src="https://via.placeholder.com/40" alt="System">
+                            <div class="notification-content">
+                                <p>New seasonal recipes available for <strong>Winter</strong></p>
+                                <p class="notification-time">2 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="notification-settings">
+            <h2 class="settings-title">Notification Settings</h2>
+            
+            <div class="notification-type">
+                <h3>Email Notifications</h3>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">Receive email notifications</span>
+                
+                <div style="margin-top: 15px; margin-left: 75px;">
+                    <label><input type="checkbox" checked> New comments on my recipes</label><br>
+                    <label><input type="checkbox" checked> Recipe approvals/rejections</label><br>
+                    <label><input type="checkbox"> Weekly recipe suggestions</label><br>
+                    <label><input type="checkbox" checked> Important account notifications</label>
+                </div>
+            </div>
+            
+            <div class="notification-type">
+                <h3>Push Notifications</h3>
+                <label class="toggle-switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">Receive push notifications</span>
+                
+                <div style="margin-top: 15px; margin-left: 75px;">
+                    <label><input type="checkbox" checked> Likes and comments</label><br>
+                    <label><input type="checkbox"> New followers</label><br>
+                    <label><input type="checkbox" checked> Recipe reminders</label>
+                </div>
+            </div>
+            
+            <button class="btn" id="saveSettings">Save Settings</button>
+        </div>
+    </div>
+
+    <script>
+        // Notification dropdown toggle
+        const notificationIcon = document.getElementById('notificationIcon');
+        const notificationDropdown = document.getElementById('notificationDropdown');
+        const notificationCount = document.getElementById('notificationCount');
+        const notificationList = document.getElementById('notificationList');
+        const markAllRead = document.getElementById('markAllRead');
+        const saveSettings = document.getElementById('saveSettings');
+        
+        notificationIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            notificationDropdown.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            notificationDropdown.classList.remove('show');
+        });
+        
+        // Mark all notifications as read
+        markAllRead.addEventListener('click', function() {
+            const unreadNotifications = notificationList.querySelectorAll('.unread');
+            unreadNotifications.forEach(notification => {
+                notification.classList.remove('unread');
+            });
+            notificationCount.textContent = '0';
+        });
+        
+        // Mark individual notification as read when clicked
+        notificationList.addEventListener('click', function(e) {
+            const notificationItem = e.target.closest('.notification-item');
+            if (notificationItem && notificationItem.classList.contains('unread')) {
+                notificationItem.classList.remove('unread');
+                updateUnreadCount();
+            }
+        });
+        
+        // Update unread notification count
+        function updateUnreadCount() {
+            const unreadCount = notificationList.querySelectorAll('.unread').length;
+            notificationCount.textContent = unreadCount;
+            if (unreadCount === 0) {
+                notificationCount.style.display = 'none';
+            } else {
+                notificationCount.style.display = 'flex';
+            }
+        }
+        
+        // Save notification settings
+        saveSettings.addEventListener('click', function() {
+            alert('Notification settings saved successfully!');
+            // In a real app, you would send these settings to your server
+        });
+        
+        // Initialize
+        updateUnreadCount();
+    </script>
+</body>
+</html>

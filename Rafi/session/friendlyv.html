@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Printer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2e8b57;
+            text-align: center;
+        }
+        .recipe-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .recipe-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .print-options {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .option-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        button {
+            background: #2e8b57;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #228b22;
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        
+        /* Print-specific styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                font-size: 12pt;
+            }
+            .print-options, button, .no-print {
+                display: none !important;
+            }
+            .recipe-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .print-condensed .recipe-image,
+            .print-condensed .recipe-story,
+            .print-condensed .ads {
+                display: none;
+            }
+            .print-condensed .ingredients,
+            .print-condensed .instructions {
+                page-break-inside: avoid;
+            }
+            .notes-section {
+                margin-top: 20px;
+                border-top: 1px dashed #ccc;
+                padding-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Recipe Printer</h1>
+    
+    <div class="print-options">
+        <h2>Print Options</h2>
+        
+        <div class="option-group">
+            <label for="layout">Print Layout:</label>
+            <select id="layout">
+                <option value="full">Full Version (with images)</option>
+                <option value="condensed">Condensed (text only)</option>
+            </select>
+        </div>
+        
+        <div class="option-group">
+            <label for="notes">Add Your Notes:</label>
+            <textarea id="notes" placeholder="Write your personal notes here..."></textarea>
+        </div>
+        
+        <div class="button-group">
+            <button onclick="printRecipe()">Print Recipe</button>
+            <button onclick="previewPrint()">Print Preview</button>
+        </div>
+    </div>
+    
+    <div class="recipe-container" id="recipe">
+        <h2>Bangladeshi Chicken Korma</h2>
+        
+        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950" class="recipe-image" alt="Chicken Korma">
+        
+        <div class="recipe-story">
+            <p>This rich and flavorful chicken korma is a traditional Bangladeshi dish often served at special occasions. 
+            The creamy sauce is made with yogurt, spices, and ground nuts for a deliciously fragrant curry.</p>
+        </div>
+        
+        <div class="ads no-print">
+            <p>Advertisement: Try our premium spice blends!</p>
+        </div>
+        
+        <div class="ingredients">
+            <h3>Ingredients:</h3>
+            <ul>
+                <li>1 kg chicken, cut into pieces</li>
+                <li>2 cups yogurt</li>
+                <li>2 onions, finely sliced</li>
+                <li>4 cloves garlic</li>
+                <li>1 inch ginger</li>
+                <li>1 tsp turmeric</li>
+                <li>2 tsp coriander powder</li>
+                <li>1 tsp cumin powder</li>
+                <li>1/2 cup cashew nuts</li>
+                <li>1/2 cup oil or ghee</li>
+                <li>Salt to taste</li>
+            </ul>
+        </div>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Grind garlic, ginger, and cashew nuts into a smooth paste.</li>
+                <li>Heat oil in a pan and fry onions until golden brown.</li>
+                <li>Add chicken pieces and brown on all sides.</li>
+                <li>Add all spices and cook for 2 minutes.</li>
+                <li>Add yogurt and nut paste, mix well.</li>
+                <li>Cover and simmer for 25-30 minutes until chicken is tender.</li>
+                <li>Garnish with fresh coriander and serve with naan or rice.</li>
+            </ol>
+        </div>
+        
+        <div class="notes-section" id="printNotes"></div>
+    </div>
+
+    <script>
+        function printRecipe() {
+            // Get selected options
+            const layout = document.getElementById('layout').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Apply print layout class
+            document.getElementById('recipe').className = `recipe-container print-${layout}`;
+            
+            // Add notes to the recipe
+            if (notes) {
+                document.getElementById('printNotes').innerHTML = `<h3>My Notes:</h3><p>${notes}</p>`;
+            } else {
+                document.getElementById('printNotes').innerHTML = '';
+            }
+            
+            // Trigger print
+            window.print();
+        }
+        
+        function previewPrint() {
+            // Get selected options
+            const layout = document.getElementById('layout').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Apply print layout class
+            document.getElementById('recipe').className = `recipe-container print-${layout}`;
+            
+            // Add notes to the recipe
+            if (notes) {
+                document.getElementById('printNotes').innerHTML = `<h3>My Notes:</h3><p>${notes}</p>`;
+            } else {
+                document.getElementById('printNotes').innerHTML = '';
+            }
+            
+            // Open print preview (actual implementation would vary)
+            alert('Print preview would show here. In a real app, this would open a print preview dialog.');
+        }
+    </script>
+</body>
+</html>

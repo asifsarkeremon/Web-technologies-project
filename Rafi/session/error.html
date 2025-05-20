@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe App - Error Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .error-box {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 5px;
+            margin-top: 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #d32f2f;
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #333;
+            margin-top: 0;
+        }
+        .error-image {
+            width: 150px;
+            margin: 20px 0;
+        }
+        .error-message {
+            color: #555;
+            font-size: 1.1em;
+            margin: 20px 0;
+        }
+        .error-actions {
+            margin: 25px 0;
+        }
+        .error-btn {
+            background: #388e3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+        }
+        .error-btn:hover {
+            background: #2e7d32;
+        }
+        .contact-link {
+            color: #388e3c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 404 Error Page -->
+    <div class="error-box" id="error-404">
+        <h1>404</h1>
+        <h2>Recipe Not Found!</h2>
+        <img src="/images/404-illustration.svg" alt="Missing recipe" class="error-image">
+        <div class="error-message">
+            The page you're looking for doesn't exist. Maybe the recipe was moved or deleted.
+        </div>
+        <div class="error-actions">
+            <a href="landing.html" class="error-btn">Go to Home</a>
+            <a href="category.html" class="error-btn">Browse Recipes</a>
+        </div>
+        <p>Need help? <a href="contact.html" class="contact-link">Contact us</a></p>
+    </div>
+
+    <!-- 500 Error Page (hidden by default) -->
+    <div class="error-box" id="error-500" style="display:none;">
+        <h1>500</h1>
+        <h2>Kitchen Disaster!</h2>
+        <img src="/images/500-illustration.svg" alt="Server error" class="error-image">
+        <div class="error-message">
+            Our servers are overwhelmed (like a burnt soufflé). Try again later!
+        </div>
+        <div class="error-actions">
+            <button onclick="window.location.reload()" class="error-btn">Try Again</button>
+            <a href="landing.html" class="error-btn">Go to Home</a>
+        </div>
+        <p>If the problem persists, <a href="contact.html" class="contact-link">let us know</a></p>
+    </div>
+
+    <script>
+        // Detect error type (in a real app, this would come from your backend)
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorType = urlParams.get('error') || '404';
+        
+        if (errorType === '500') {
+            document.getElementById('error-404').style.display = 'none';
+            document.getElementById('error-500').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
