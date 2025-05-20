@@ -1,16 +1,16 @@
 <?php
 session_start();
-if (isset($_POST['submit'])) {
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $gender = trim($_POST['gender']);
     $pass = trim($_POST['pass']);
 
-    if ($name == "" || $username == "" || $email == "" || $gender == "" || $pass == "") {
-        echo "Please! Fill up all the forms.";
-    } else if ($username == $pass) {
-
+    if (empty($name) || empty($username) || empty($email) || empty($gender) || empty($pass)) {
+        echo "Please fill up all the forms.";
+    } else {
         $_SESSION['signup_name'] = $name;
         $_SESSION['signup_username'] = $username;
         $_SESSION['signup_email'] = $email;
@@ -19,10 +19,8 @@ if (isset($_POST['submit'])) {
 
         header('Location: 1_login.php');
         exit();
-    } else {
-        echo "invalid user!";
     }
 } else {
-    echo "Invalid request! Please submit form!";
+    echo "Invalid request! Please submit the form!";
 }
 ?>

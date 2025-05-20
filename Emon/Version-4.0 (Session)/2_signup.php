@@ -47,7 +47,7 @@
 
                 <p id="vmsg"></p><br>
 
-                <button type="submit" value="submit" class="c3">Submit</button>
+                <button type="submit" name="submit" value="submit" class="c3">Submit</button>
                 <button type="reset" value="reset" class="c3">Reset</button>
 
                 <a href="1_login.php" class="c4">Go to Login</a>

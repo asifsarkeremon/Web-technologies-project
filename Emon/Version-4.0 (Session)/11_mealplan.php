@@ -28,7 +28,7 @@
         <nav class="c8">
             <ul class="c9">
                 <li><a href="8_dashboard.php">Home</a></li>
-                <li><a href="9_receipe.php">Recipe</a></li>
+                <li><a href="9_receipes.php">Recipe</a></li>
                 <li><a href="11_mealplan.php">Meal Planner</a></li>
                 <li><a href="12_Shop_list.php">Shopping List</a></li>
                 <li><a href="13_nutri_info.php">Nutritional Info</a></li>
