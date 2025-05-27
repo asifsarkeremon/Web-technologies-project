@@ -40,7 +40,7 @@
                 </div>                
 
                 <div class="c2">
-                    <label for="pass">Password</label>
+                    <label>Password</label>
                     <input name="pass" id="pass" type="password" value=""> <br>
                     <p id="pmsg"></p>
                 </div>
