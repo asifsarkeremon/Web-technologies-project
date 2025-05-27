@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeMaster - Your Digital Recipe Book</title>
+    <style>
+        /* Simple Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Navigation */
+        nav {
+            background: #2e8b57;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            flex: 1;
+            max-width: 600px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background: #228b22;
+        }
+        
+        .notification-btn {
+            color: white;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .notification-btn:hover {
+            background: #228b22;
+        }
+        
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 6rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* Hero Section */
+        #hero {
+            background: #f5f5f5;
+        }
+        
+        #hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2e8b57;
+        }
+        
+        #hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        /* Features Section */
+        #features {
+            background: white;
+        }
+        
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1000px;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            flex: 1 1 300px;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: #f9f9f9;
+        }
+        
+        /* Testimonials */
+        #testimonials {
+            background: #f5f5f5;
+        }
+        
+        .testimonial {
+            max-width: 600px;
+            margin: 1rem auto;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: #2e8b57;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0.5rem;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #228b22;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2e8b57;
+            color: #2e8b57;
+        }
+        
+        .btn-outline:hover {
+            background: #2e8b57;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+        <a href="notifi.html" class="notification-btn">🔔</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>Welcome to RecipeMaster</h1>
+        <p>Your digital kitchen companion for organizing, discovering, and sharing delicious recipes</p>
+        <div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2>Amazing Features</h2>
+        <p>Everything you need to manage your recipes in one place</p>
+        
+        <div class="features-container">
+            <div class="feature-card">
+                <h3>Recipe Organization</h3>
+                <p>Easily categorize your recipes by meal type, cuisine, or dietary needs</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Seasonal Suggestions</h3>
+                <p>Get recommendations based on what's in season in Bangladesh</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Conversion Calculator</h3>
+                <p>Instantly convert measurements between metric and imperial</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Print-Friendly</h3>
+                <p>Print clean recipe cards with your personal notes</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Rating System</h3>
+                <p>Rate recipes and read reviews from other home cooks</p>
+            </div>
+            
+            <div class="feature-card">
+                <h3>Mobile Friendly</h3>
+                <p>Access your recipes anywhere, anytime</p>
+            </div>
+        </div>
+        
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2>What Our Users Say</h2>
+        <p>Join thousands of happy home cooks using RecipeMaster</p>
+        
+        <div class="testimonial">
+            <p>"I've cut my meal planning time in half since using RecipeMaster. The seasonal suggestions help me cook with fresh, local ingredients."</p>
+            <p><strong>- Ayesha, Dhaka</strong></p>
+        </div>
+        
+        <div class="testimonial">
+            <p>"As a busy mom, I love having all my family recipes organized in one place. The print feature is perfect for my recipe binder!"</p>
+            <p><strong>- Fatima, Chittagong</strong></p>
+        </div>
+        
+        <div class="testimonial">
+            <p>"The measurement converter has saved me so many times when trying international recipes. No more guessing!"</p>
+            <p><strong>- Rahim, Sylhet</strong></p>
+        </div>
+        
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About RecipeMaster</h2>
+        <p>RecipeMaster was created in 2025 to help home cooks in Bangladesh and beyond organize their favorite recipes, discover new dishes, and connect with a community of food lovers.</p>
+        <p>Our mission is to make cooking easier, more enjoyable, and more sustainable by promoting seasonal, local ingredients.</p>
+        <a href="#features" class="btn btn-outline">See Features</a>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <p style="margin-top: 0.5rem;">Made with ❤️ in Bangladesh</p>
+    </footer>
+
+    <script>
+        // Simple smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

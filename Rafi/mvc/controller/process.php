@@ -51,16 +51,9 @@ echo "<style>
     .session-summary { background: #e0ffe0; padding: 10px; margin: 15px 0; border: 1px solid #b2d8b2; }
 </style>";
 
-echo "<a class='back' href='seasonal.html'>← Back to Form</a> | ";
-echo "<a class='back' href='?logout=1'>Logout Session</a><hr>";
+echo "<a class='back' href='/project/php/view/seasonal.html'>← Back to Form</a> | ";
 
 // Logout / End session
-if (isset($_GET['logout'])) {
-    session_unset();
-    session_destroy();
-    echo "<p style='color:blue;'>Session ended. <a href='index.html'>Start over</a>.</p>";
-    exit;
-}
 
 // Handle Seasonal Form
 if (isset($_POST['season_submit'])) {

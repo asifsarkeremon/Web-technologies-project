@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Ratings</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+        .box {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        h1 {
+            color: green;
+            text-align: center;
+        }
+        h2 {
+            color: darkgreen;
+        }
+        .stars {
+            font-size: 30px;
+            margin: 10px 0;
+        }
+        .star {
+            color: gray;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .star.yellow {
+            color: gold;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin: 10px 0;
+        }
+        button {
+            background: green;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .review {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .review-name {
+            font-weight: bold;
+            color: darkgreen;
+        }
+        .top-recipe {
+            padding: 8px 0;
+            border-bottom: 1px dotted #ccc;
+        }
+        .red {
+            color: red;
+        }
+        .contact-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .contact-btn a {
+            background: darkgreen;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .contact-btn a:hover {
+            background: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Recipe Rating System</h1>
+
+   <form method="POST" action="/project/php/controller/submit_review.php" onsubmit="return validateReviewForm()">
+      
+             <!-- Rating Box -->
+    <div class="box">
+        <h2>Rate This Recipe</h2>
+        <div class="stars">
+            <span class="star" onclick="rate(1)">★</span>
+            <span class="star" onclick="rate(2)">★</span>
+            <span class="star" onclick="rate(3)">★</span>
+            <span class="star" onclick="rate(4)">★</span>
+            <span class="star" onclick="rate(5)">★</span>
+        </div>
+        <p id="rating-error" class="red"></p>
+        <button onsubmit="submitRating()">Submit Rating</button>
+    </div>
+
+    <!-- Review Box -->
+    <div class="box">
+        <h2>Write a Review</h2>
+        <input type="text" id="name" placeholder="Your Name" style="width:100%;padding:5px;">
+        <textarea id="review" placeholder="Your review..."></textarea>
+        <p id="review-error" class="red"></p>
+        <button  action="/project/php/controller/submit_review.php" onsubmit="submitReview()">Submit Review</button>
+
+        <h3>Recent Reviews</h3>
+        <div id="reviews">
+            <div class="review">
+                <div class="review-name">Sarah - May 10</div>
+                <p>This recipe was delicious! Will make again.</p>
+            </div>
+            <div class="review">
+                <div class="review-name">Mike - May 8</div>
+                <p>Easy to follow and turned out great.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Recipes -->
+    <div class="box">
+        <h2>Top Recipes</h2>
+        <div class="top-recipe">
+            <strong>Chocolate Cake</strong> ★★★★★ (4.9)
+        </div>
+        <div class="top-recipe">
+            <strong>Vegetable Stir Fry</strong> ★★★★☆ (4.3)
+        </div>
+        <div class="top-recipe">
+            <strong>Homemade Pizza</strong> ★★★★☆ (4.1)
+        </div>
+    </div>
+
+    <!-- Contact Us Button -->
+    <div class="contact-btn">
+        <a href="conatct.html">Contact Us</a>
+    </div>
+
+   </form>
+
+    <script>
+        // Store the user's rating
+        let userRating = 0;
+
+        // Rate with stars
+        function rate(num) {
+            userRating = num;
+            const stars = document.querySelectorAll('.star');
+            
+            // Color the stars
+            stars.forEach((star, index) => {
+                if (index < num) {
+                    star.classList.add('yellow');
+                } else {
+                    star.classList.remove('yellow');
+                }
+            });
+        }
+
+        // Submit rating
+        function submitRating() {
+            if (userRating === 0) {
+                document.getElementById('rating-error').textContent = 'Please select a rating';
+                return;
+            }
+            
+            document.getElementById('rating-error').textContent = '';
+            alert('Thanks for your ' + userRating + ' star rating!');
+            
+            // In real app, save to database here
+            console.log('Rating submitted:', userRating);
+        }
+
+        // Submit review
+        function submitReview() {
+            const name = document.getElementById('name').value.trim();
+            const review = document.getElementById('review').value.trim();
+            const error = document.getElementById('review-error');
+            error.textContent = '';
+
+            if (name === '' || review === '') {
+                error.textContent = 'Please fill in both fields';
+                return;
+            }
+
+            if (name.length > 50) {
+                error.textContent = 'Name should be less than 50 characters';
+                return;
+            }
+
+            if (review.length > 300) {
+                error.textContent = 'Review should be less than 300 characters';
+                return;
+            }
+
+            // Create review
+            const reviewDiv = document.createElement('div');
+            reviewDiv.className = 'review';
+            
+            const date = new Date().toLocaleDateString();
+            reviewDiv.innerHTML = `
+                <div class="review-name">${name} - ${date}</div>
+                <p>${review}</p>
+            `;
+              // Add to top of reviews
+            document.getElementById('reviews').prepend(reviewDiv);
+            
+            // Clear form
+            document.getElementById('name').value = '';
+            document.getElementById('review').value = '';
+            
+            // In real app, save to database here
+            console.log('Review submitted:', {name, review});
+        }
+        
+        function validateReviewForm() {
+            const name = document.getElementById('name').value.trim();
+            const review = document.getElementById('review').value.trim();
+            const error = document.getElementById('review-error');
+            error.textContent = '';
+
+            if (name === '' || review === '') {
+                error.textContent = 'Please fill in both fields';
+                return false;
+            }
+
+            if (name.length > 50) {
+                error.textContent = 'Name should be less than 50 characters';
+                return false;
+            }
+
+            if (review.length > 300) {
+                error.textContent = 'Review should be less than 300 characters';
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

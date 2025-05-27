@@ -1,5 +1,5 @@
 <?php
-session_start(); //
+session_start(); 
 
 $recipes = [
     "Italian-Breakfast" => [
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($cuisine) || empty($meal)) {
         echo "<h3 style='color:red;'>Error: Please select both cuisine and meal type.</h3>";
-        echo "<p><a href='cateindex.html'>Go Back</a></p>";
+        echo "<p><a href='/project/php/view/cateindex.html'>Go Back</a></p>";
         exit;
     }
 
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p style='color:orange;'>We're still adding this recipe. Check back later!</p>";
     }
 
-    echo "<br><a href='cateindex.html' style='display:inline-block; margin-top:20px; background:#4CAF50; color:white; padding:10px 20px; border-radius:5px; text-decoration:none;'>Search Again</a>";
+    echo "<br><a href='/project/php/view/cateindex.html' style='display:inline-block; margin-top:20px; background:#4CAF50; color:white; padding:10px 20px; border-radius:5px; text-decoration:none;'>Search Again</a>";
     echo "</div>";
 }
 ?>

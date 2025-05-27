@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         echo "<h2 style='color:green;'>Message submitted successfully!</h2>";
         echo "<p>Thank you, <strong>$name</strong>. We'll respond to your message about <strong>$subject</strong> soon.</p>";
-        echo "<a href='conatct.html'>Submit another message</a>";
+        echo "<a href='/project/php/view/conatct.html'>Submit another message</a>";
     }
 }
 ?>

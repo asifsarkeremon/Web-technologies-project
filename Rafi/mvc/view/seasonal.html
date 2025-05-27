@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seasonal Recipe Suggestions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #2e8b57;
+            text-align: center;
+        }
+        h2 {
+            color: #228b22;
+            border-bottom: 2px solid #2e8b57;
+            padding-bottom: 5px;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+        }
+        td {
+            padding: 8px;
+            vertical-align: top;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background: #2e8b57;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background: #228b22;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Seasonal Recipe Suggestions</h1>
+
+    <!-- Seasonal Produce Guide -->
+    <div class="section">
+        <h2>Seasonal Produce Guide</h2>
+        <form method="post" action="/project/php/controller/process.php">
+            <table>
+                <tr>
+                    <td>Select the season:</td>
+                    <td>
+                        <select name="season" required>
+                            <option value="">--Select--</option>
+                            <option>Summer (March-June)</option>
+                            <option>Monsoon (July-October)</option>
+                            <option>Autumn (November)</option>
+                            <option>Winter (December-February)</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Submit:</td>
+                    <td>
+                        <input type="submit" name="season_submit" value="Get Seasonal Recipes">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <!-- Holiday Meal Suggestions -->
+    <div class="section">
+        <h2>Holiday Meal Suggestions</h2>
+        <form method="post" action="/project/php/controller/process.php">
+            <table>
+                <tr>
+                    <td>Select a holiday:</td>
+                    <td>
+                        <select name="holiday" required>
+                            <option value="">--Select--</option>
+                            <option>Eid-ul-Fitr</option>
+                            <option>Eid-ul-Adha</option>
+                            <option>Durga Puja</option>
+                            <option>Pohela Boishakh</option>
+                            <option>Nobanno</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Submit:</td>
+                    <td>
+                        <input type="submit" name="holiday_submit" value="Find Holiday Meals">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <!-- Farmers Market Finder -->
+    <div class="section">
+        <h2>Find Local Farmers Markets</h2>
+        <form method="post" action="/project/php/controller/process.php">
+            <table>
+                <tr>
+                    <td>Enter your location:</td>
+                    <td>
+                        <input type="text" name="location" placeholder="Enter your city or district" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Submit:</td>
+                    <td>
+                        <input type="submit" name="market_submit" value="Find Farmers Markets">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+</body>
+</html>

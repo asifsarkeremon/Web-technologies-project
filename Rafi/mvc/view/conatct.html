@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us - RecipeMaster</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border: 2px solid #2e8b57;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2e8b57;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-full-width {
+            grid-column: span 2;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #2e8b57;
+            display: block;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #2e8b57;
+            color: #fff;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #228b22;
+        }
+        .error {
+            color: #cc0000;
+            font-size: 0.9em;
+            margin: -8px 0 10px 0;
+        }
+        .captcha-container {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .captcha-text {
+            font-size: 24px;
+            letter-spacing: 3px;
+            margin: 10px 0;
+            color: #2e8b57;
+            font-weight: bold;
+            user-select: none;
+        }
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .confirmation h2 {
+            color: #2e8b57;
+            font-size: 1.8em;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-full-width {
+                grid-column: span 1;
+            }
+            .form-container {
+                padding: 25px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <div class="form-container">
+        <h1>Contact RecipeMaster</h1>
+        
+        <form id="contactForm" method="POST" action="/project/php/controller/process_contact.php" onsubmit="return validateForm()">
+            <div class="form-grid">
+                <div>
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <p class="error" id="nameError"></p>
+                </div>
+                
+                <div>
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                    <p class="error" id="emailError"></p>
+                </div>
+                
+                <div class="form-full-width">
+                    <label for="subject">Subject:</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a subject</option>
+                        <option>Account Support</option>
+                        <option>Recipe Submission</option>
+                        <option>Feature Request</option>
+                        <option>Report a Problem</option>
+                        <option>Other Inquiry</option>
+                    </select>
+                    <p class="error" id="subjectError"></p>
+                </div>
+                
+                <div class="form-full-width">
+                    <label for="message">Your Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <p class="error" id="messageError"></p>
+                </div>
+                
+                <div class="form-full-width">
+                    <div class="captcha-container">
+                        <p>Please enter the text below to prove you're not a robot:</p>
+                        <div class="captcha-text" id="captchaText"></div>
+                        <input type="text" id="captchaInput" placeholder="Enter the text above" required>
+                        <p class="error" id="captchaError"></p>
+                    </div>
+                </div>
+                
+                <div class="form-full-width">
+                    <input type="submit" value="Send Message">
+                </div>
+            </div>
+        </form>
+        
+        <div class="confirmation" id="confirmation">
+            <h2>Thank You!</h2>
+            <p>Your message has been successfully submitted.</p>
+            <p>We've sent a confirmation email to <span id="userEmail"></span>.</p>
+            <p>Our team will get back to you within 2 business days.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Generate random CAPTCHA
+    function generateCaptcha() {
+        const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let captcha = "";
+        for (let i = 0; i < 6; i++) {
+            captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        document.getElementById("captchaText").textContent = captcha;
+        return captcha;
+    }
+    
+    let currentCaptcha = generateCaptcha();
+    
+    // Refresh CAPTCHA
+    document.getElementById("captchaText").addEventListener("click", function() {
+        currentCaptcha = generateCaptcha();
+        document.getElementById("captchaInput").value = "";
+    });
+    
+    function validateForm() {
+        let isValid = true;
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const subject = document.getElementById("subject").value;
+        const message = document.getElementById("message").value.trim();
+        const captchaInput = document.getElementById("captchaInput").value.trim();
+
+        document.querySelectorAll(".error").forEach(e => e.textContent = "");
+
+        if (!name) {
+            document.getElementById("nameError").textContent = "Please enter your name";
+            isValid = false;
+        }
+
+        if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+            document.getElementById("emailError").textContent = "Please enter a valid email";
+            isValid = false;
+        }
+
+        if (!subject) {
+            document.getElementById("subjectError").textContent = "Please select a subject";
+            isValid = false;
+        }
+
+        if (!message) {
+            document.getElementById("messageError").textContent = "Please enter your message";
+            isValid = false;
+        }
+
+        if (captchaInput !== currentCaptcha) {
+            document.getElementById("captchaError").textContent = "CAPTCHA verification failed";
+            isValid = false;
+            currentCaptcha = generateCaptcha();
+            document.getElementById("captchaInput").value = "";
+        }
+
+        if (isValid) {
+            document.getElementById("userEmail").textContent = email;
+            document.getElementById("contactForm").style.display = "none";
+            document.getElementById("confirmation").style.display = "block";
+            return false; // Prevent actual form submission for this demo
+        }
+
+        return isValid;
+    }
+</script>
+</body>
+</html>

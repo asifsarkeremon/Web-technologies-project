@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Recipe Finder</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f0f8ff;
+            margin: 20px;
+        }
+        h1 {
+            color: #2e8b57;
+            text-align: center;
+        }
+        .filter-area {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const cuisine = document.getElementById("cuisine").value;
+            const meal = document.getElementById("meal").value;
+
+            if (!cuisine || !meal) {
+                alert("Please select both cuisine and meal type.");
+                return false;
+            }
+
+            return true; // Allow form submission
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Find Your Perfect Recipe</h1>
+
+    <div class="filter-area">
+        <h2>Choose Your Options:</h2>
+
+        <form method="POST" action="/project/php/controller/find_recipe.php" onsubmit="return validateForm();">
+            <select name="cuisine" id="cuisine">
+                <option value="">-- Select Cuisine --</option>
+                <option>Italian</option>
+                <option>Chinese</option>
+                <option>Indian</option>
+                <option>Mexican</option>
+                <option>American</option>
+            </select>
+            
+            <select name="meal" id="meal">
+                <option value="">-- Select Meal Type --</option>
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner</option>
+            </select>
+            
+            <button type="submit">Find Recipe</button>
+        </form>
+    </div>
+
+</body>
+</html>
