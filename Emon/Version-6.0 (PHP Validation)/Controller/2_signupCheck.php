@@ -71,7 +71,7 @@ function usernamecheck($username) {
 // Validate email
 function emailcheck($email){
     if ($email == "") {
-        echo "Name field cannot be empty";
+        echo "Email field cannot be empty";
     }
 
     $isValid = true;

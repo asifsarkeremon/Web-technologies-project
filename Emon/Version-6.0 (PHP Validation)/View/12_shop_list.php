@@ -1,12 +1,11 @@
 <?php
-    /*
+
     session_start();
     if(isset($_COOKIE['status'])){
 
     }else{
         header('location: 1_login.php');
     }
-    */
 ?>
 
 <!DOCTYPE html>
